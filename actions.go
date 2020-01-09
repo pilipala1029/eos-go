@@ -84,23 +84,19 @@ func (a *ActionData) SetToServer(toServer bool) {
 type jsonActionToServer struct {
 	Account       AccountName       `json:"account"`
 	Name          ActionName        `json:"name"`
-	Authorization []PermissionLevel `json:"authorization"`
+	Authorization []PermissionLevel `json:"authorization,omitempty"`
 	Data          HexBytes          `json:"data,omitempty"`
 }
 
 type jsonActionFromServer struct {
 	Account       AccountName       `json:"account"`
 	Name          ActionName        `json:"name"`
-	Authorization []PermissionLevel `json:"authorization"`
+	Authorization []PermissionLevel `json:"authorization,omitempty"`
 	Data          interface{}       `json:"data,omitempty"`
 	HexData       HexBytes          `json:"hex_data,omitempty"`
 }
 
 func (a *Action) MarshalJSON() ([]byte, error) {
-	auths := a.Authorization
-	if auths == nil {
-		auths = make([]PermissionLevel, 0)
-	}
 	if a.toServer {
 		data, err := a.ActionData.EncodeActionData()
 		if err != nil {
@@ -110,7 +106,7 @@ func (a *Action) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&jsonActionToServer{
 			Account:       a.Account,
 			Name:          a.Name,
-			Authorization: auths,
+			Authorization: a.Authorization,
 			Data:          data,
 		})
 	}
@@ -118,7 +114,7 @@ func (a *Action) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&jsonActionFromServer{
 		Account:       a.Account,
 		Name:          a.Name,
-		Authorization: auths,
+		Authorization: a.Authorization,
 		HexData:       a.HexData,
 		Data:          a.Data,
 	})

@@ -14,7 +14,7 @@ import (
 const PublicKeyPrefix = "PUB_"
 const PublicKeyK1Prefix = "PUB_K1_"
 const PublicKeyR1Prefix = "PUB_R1_"
-const PublicKeyPrefixCompat = "EOS"
+const PublicKeyPrefixCompat = "DCCY"
 
 type innerPublicKey interface {
 	key(content []byte) (*btcec.PublicKey, error)
