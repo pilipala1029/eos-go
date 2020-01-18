@@ -1,6 +1,6 @@
 package token
 
-import eos "github.com/eoscanada/eos-go"
+import eos "github.com/wade-liwei/eos-go"
 
 func NewExTransfer(from, to eos.AccountName, quantity eos.ExtendedAsset, memo string) *eos.Action {
 	return &eos.Action{

@@ -12,7 +12,8 @@ import (
 
 	"math"
 
-	"github.com/eoscanada/eos-go/ecc"
+	//"github.com/eoscanada/eos-go/ecc"
+	"github.com/wade-liwei/eos-go/ecc"
 	"go.uber.org/zap"
 )
 
